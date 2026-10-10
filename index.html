@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#06050f">
+<meta name="color-scheme" content="dark">
 <title>Lumen — виртуальное казино</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,14 +13,14 @@
 :root{--bg:#06050f;--ink:#f3f1ff;--mute:#a9a5cc;--violet:#8b5cf6;--cyan:#22d3ee;--pink:#f472b6;--mint:#34d399;--red:#fb4b6a;--line:rgba(255,255,255,.16)}
 *{box-sizing:border-box;margin:0}
 html{-webkit-text-size-adjust:100%}
-body{min-height:100vh;background:var(--bg);color:var(--ink);font:400 15px/1.5 Manrope,system-ui,sans-serif;overflow-x:hidden}
+body{min-height:100vh;min-height:100dvh;-webkit-tap-highlight-color:transparent;background:var(--bg);color:var(--ink);font:400 15px/1.5 Manrope,system-ui,sans-serif;overflow-x:hidden}
 body::before,body::after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(90px);opacity:.55;animation:drift 22s ease-in-out infinite alternate}
 body::before{width:60vmax;height:60vmax;left:-20vmax;top:-20vmax;background:radial-gradient(circle,#6d28d9,transparent 65%)}
 body::after{width:55vmax;height:55vmax;right:-18vmax;bottom:-22vmax;background:radial-gradient(circle,#0891b2,transparent 65%);animation-delay:-8s}
 @keyframes drift{to{transform:translate(8vmax,6vmax) scale(1.15)}}
 h1,h2,h3,.disp{font-family:Unbounded,Manrope,sans-serif;font-weight:700;letter-spacing:-.01em}
 [hidden]{display:none!important}
-button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;touch-action:manipulation}
 input{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
 
@@ -33,13 +35,13 @@ input{font:inherit;color:inherit}
 .chip{padding:8px 14px;border-radius:12px;background:rgba(255,255,255,.08);border:1px solid var(--line);font-weight:600;font-size:14px;transition:background .15s}
 .chip:hover{background:rgba(255,255,255,.16)}
 .chip.on{background:rgba(139,92,246,.35);border-color:var(--violet);box-shadow:0 0 16px rgba(139,92,246,.45)}
-input[type=text],input[type=password],input[type=number]{width:100%;padding:13px 16px;border-radius:14px;background:rgba(0,0,0,.28);border:1px solid var(--line);outline:0;transition:border-color .15s,box-shadow .15s}
+input[type=text],input[type=password],input[type=number]{width:100%;font-size:16px;padding:13px 16px;border-radius:14px;background:rgba(0,0,0,.28);border:1px solid var(--line);outline:0;transition:border-color .15s,box-shadow .15s}
 input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(34,211,238,.2)}
 label{display:block;color:var(--mute);font-size:13px;margin:0 0 6px 2px}
 .muted{color:var(--mute)}
 
 /* вход */
-#auth{min-height:100vh;display:grid;place-items:center;padding:24px}
+#auth{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:24px}
 .authbox{width:min(440px,100%)}
 .logo{font-size:clamp(40px,10vw,64px);background:linear-gradient(100deg,#fff,#c4b5fd 40%,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(139,92,246,.6));text-align:center}
 .tag{text-align:center;color:var(--mute);margin:6px 0 22px}
@@ -117,10 +119,28 @@ ul.rules{padding-left:18px;color:var(--mute);font-size:14px}
 .lb li:nth-child(1) .rk{background:#fbbf24;color:#2a1a00;box-shadow:0 0 18px rgba(251,191,36,.6)}
 .lb li:nth-child(2) .rk{background:#cbd5e1;color:#111}
 .lb li:nth-child(3) .rk{background:#d6845a;color:#1c0d03}
-.lb .nm{flex:1;font-weight:700;overflow:hidden;text-overflow:ellipsis}
+.lb .nm{flex:1;min-width:0;font-weight:700}
+.lb .nm b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb .nm small{display:block;font-weight:500;font-size:12.5px;color:var(--mute)}
+.lb li.tap{cursor:pointer;transition:background .15s}
+.lb li.tap:hover{background:rgba(255,255,255,.1)}
 .lb .vl{font-family:Unbounded,sans-serif;font-weight:500;color:var(--cyan)}
 .empty{text-align:center;color:var(--mute);padding:26px 0}
 
+.nav button i{font-style:normal;margin-right:6px}
+.av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;flex:none;font:700 18px Unbounded,sans-serif;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 0 18px rgba(139,92,246,.35)}
+.av.big{width:76px;height:76px;font-size:32px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint);margin-right:6px}
+.dot.off{background:#6b6890;box-shadow:none}
+.pcount{margin-bottom:12px;color:var(--mute)}.pcount b{color:var(--ink)}
+.phead{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.pname{font-size:22px;margin:0 0 2px;word-break:break-word}.pname small{font:600 13px Manrope,sans-serif;color:var(--cyan)}
+.ranks{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.rank{padding:8px 12px;border-radius:14px;background:rgba(139,92,246,.18);border:1px solid rgba(139,92,246,.5);font-weight:700;font-size:14px}
+.stats.big{grid-template-columns:repeat(4,1fr)}
+.bar{height:12px;border-radius:99px;background:rgba(0,0,0,.35);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--violet),var(--cyan));box-shadow:0 0 14px rgba(34,211,238,.6)}
+.back{margin-bottom:14px}
 #toasts{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:99;display:grid;gap:8px;width:min(420px,calc(100% - 24px))}
 .toast{padding:12px 16px;border-radius:16px;font-weight:600;text-align:center;-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);background:rgba(20,18,40,.8);border:1px solid var(--line);animation:tin .25s}
 .toast.err{border-color:rgba(251,75,106,.6);color:#ffb3c0}
@@ -128,13 +148,32 @@ ul.rules{padding-left:18px;color:var(--mute);font-size:14px}
 @keyframes tin{from{opacity:0;transform:translateY(-8px)}}
 
 @media(max-width:760px){
+  body::before,body::after{filter:blur(60px);opacity:.45}
+  .glass{-webkit-backdrop-filter:blur(16px) saturate(150%);backdrop-filter:blur(16px) saturate(150%);border-radius:22px}
   .grid2,.play{grid-template-columns:1fr}
-  header.top{top:6px;padding:8px 12px}
-  .uname{display:none}
-  .nav{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));margin:0;padding:6px;justify-content:space-around;border-radius:22px;background:rgba(20,18,40,.7);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);border:1px solid var(--line);z-index:30}
-  .nav button{flex:1}
-  main{padding-bottom:84px}
+  header.top{top:calc(6px + env(safe-area-inset-top));padding:8px 12px;border-radius:18px;width:calc(100% - 16px)}
+  .uname,.me #logout{display:none}
+  .brand{font-size:17px}
+  .bal{font-size:15px;padding:7px 14px}
+  .me{margin-left:auto}
+  .nav{position:fixed;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom));margin:0;padding:5px;gap:2px;justify-content:space-around;border-radius:24px;background:rgba(20,18,40,.8);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);border:1px solid var(--line);z-index:30;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+  .nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;padding:7px 2px;font-size:11px;border-radius:18px;min-height:48px}
+  .nav button i{font-size:19px;margin:0}
+  main{width:calc(100% - 16px);margin-top:12px;padding-bottom:calc(92px + env(safe-area-inset-bottom))}
   .pad{padding:16px}
+  .picker{gap:8px}
+  .gbtn{padding:12px 4px;border-radius:16px;font-size:14px}.gbtn span{font-size:26px}
+  .stage{min-height:0}
+  .play{gap:16px}
+  #play{position:sticky;bottom:calc(84px + env(safe-area-inset-bottom));z-index:5;box-shadow:0 0 26px rgba(139,92,246,.6),0 8px 24px rgba(0,0,0,.55)}
+  .chip{padding:10px 14px;min-height:42px}
+  .btn{min-height:48px}
+  .stats.big{grid-template-columns:1fr 1fr}
+  .debt{font-size:32px}
+  .lb li{padding:10px 12px;gap:10px}
+  .rball{width:110px;height:110px;font-size:38px}
+  .av.big{width:64px;height:64px;font-size:26px}
+  .pname{font-size:19px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -165,9 +204,11 @@ ul.rules{padding-left:18px;color:var(--mute);font-size:14px}
   <header class="top glass">
     <h2 class="brand disp" style="margin:0">LUMEN</h2>
     <nav class="nav" id="nav">
-      <button class="on" data-v="games">Игры</button>
-      <button data-v="bank">Банк</button>
-      <button data-v="top">Топы</button>
+      <button class="on" data-v="games"><i>🎰</i><span>Игры</span></button>
+      <button data-v="bank"><i>🏦</i><span>Банк</span></button>
+      <button data-v="top"><i>🏆</i><span>Топы</span></button>
+      <button data-v="players"><i>👥</i><span>Игроки</span></button>
+      <button data-v="profile"><i>👤</i><span>Профиль</span></button>
     </nav>
     <div class="me">
       <span class="uname" id="uname"></span>
@@ -245,10 +286,6 @@ ul.rules{padding-left:18px;color:var(--mute);font-size:14px}
             <p class="muted" id="bonusTxt"></p>
             <div class="row"><button class="btn" id="bonusBtn">Забрать бонус</button></div>
           </div>
-          <div class="glass pad">
-            <h2>Ваша статистика</h2>
-            <div class="stats" id="stats"></div>
-          </div>
         </div>
       </div>
     </section>
@@ -260,13 +297,32 @@ ul.rules{padding-left:18px;color:var(--mute);font-size:14px}
         <ul class="lb" id="lb"></ul>
       </div>
     </section>
+
+    <!-- Игроки -->
+    <section class="view" id="v-players">
+      <div class="glass pad">
+        <div class="pcount" id="pcount">Загрузка…</div>
+        <input id="psearch" type="text" placeholder="Поиск по нику" autocomplete="off">
+        <div class="ttabs" id="psort" style="margin-top:12px">
+          <button class="chip on" data-s="seen">Недавние</button>
+          <button class="chip" data-s="new">Новые</button>
+          <button class="chip" data-s="bal">По балансу</button>
+        </div>
+        <ul class="lb" id="plist"></ul>
+      </div>
+    </section>
+
+    <!-- Профиль -->
+    <section class="view" id="v-profile">
+      <div class="glass pad" id="profBox"></div>
+    </section>
   </main>
 </div>
 <div id="toasts"></div>
 
 <script>
 /* ===== Настройка: вставьте URL веб-приложения Google Apps Script (оканчивается на /exec) ===== */
-const API_URL = 'https://script.google.com/macros/s/AKfycbzP4NoDtdDEY825s7SfQAubqT4FbRx5DOhC0n-sd8psdIvW_WSmhWX3IGRbrRnGZ8FS/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbwUWPV3pwiX34tpdEL5TY8cHGF7mTkivGPb-324teYfzXxGKHssbQfgfWA0ld-7qwOo/exec';
 
 const SYM = ['🍒','🍋','🔔','💎','7️⃣'];
 const REDS = [1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
@@ -367,13 +423,18 @@ function applyState(s) {
 }
 
 /* ---------- Навигация ---------- */
-$('#nav').onclick = e => { const b = e.target.closest('button'); if (b) openView(b.dataset.v); };
-function openView(v) {
+$('#nav').onclick = e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.v === 'profile') openProfile(session.user); else openView(b.dataset.v);
+};
+function openView(v, navKey) {
   view = v;
-  $$('#nav button').forEach(b => b.classList.toggle('on', b.dataset.v === v));
+  $$('#nav button').forEach(b => b.classList.toggle('on', b.dataset.v === (navKey || v)));
   $$('.view').forEach(x => x.classList.toggle('on', x.id === 'v-' + v));
   clearInterval(lbTimer);
   if (v === 'top') { loadTops(); lbTimer = setInterval(loadTops, 30000); }
+  if (v === 'players') { loadPlayers(); lbTimer = setInterval(loadPlayers, 30000); }
+  window.scrollTo({top: 0});
 }
 
 /* ---------- Игры ---------- */
@@ -469,6 +530,7 @@ function showResult(j) {
   else detail = `Выпало ${r.roll}, нужно ${dMode==='under'?'меньше':'больше'} ${$('#dt').value}`;
   let extra = j.repaid > 0 ? `<small>На кредит автоматически ушло ${money(j.repaid)}</small>` : '';
   el.className = 'result ' + (win ? 'win' : 'lose');
+  if (navigator.vibrate) navigator.vibrate(win ? [40,50,40] : 20);
   el.innerHTML = (win ? `Выигрыш +${money(j.profit)}` : `Проигрыш −${money(j.bet)}`) + `<small>${esc(detail)}</small>` + extra;
 }
 
@@ -483,9 +545,6 @@ function renderBank() {
     `<button class="btn ghost" data-a="${a}" ${L?'disabled':''}>Взять ${money(a).replace('.00','')}<small>вернуть ${money(a*(1+CONF.loanRate)).replace('.00','')}</small></button>`).join('');
   $('#repayBox').hidden = !L;
   $('#rules').innerHTML = `<li>${Math.round(CONF.autoRepay*100)}% чистого выигрыша автоматически идёт на погашение кредита.</li><li>Погашать можно частями в любой момент.</li><li>Новый кредит — только после полного возврата старого.</li>`;
-  const wr = S.games ? Math.round(S.wins / S.games * 100) : 0;
-  const st = [['Партий',S.games],['Побед',`${S.wins} (${wr}%)`],['Поставлено',money(S.totalWagered)],['Выиграно',money(S.totalWon)],['Лучший выигрыш',money(S.biggestWin)],['Время в игре',fmtTime(S.playSeconds)]];
-  $('#stats').innerHTML = st.map(([k,v]) => `<div class="stat"><span class="muted">${k}</span><b>${esc(v)}</b></div>`).join('');
   tickBonus();
 }
 $('#loans').onclick = async e => {
@@ -532,9 +591,79 @@ function renderTops() {
   const cfg = TOPS.find(t => t.k === topKey), list = boards && boards[topKey];
   if (!list) return;
   $('#lb').innerHTML = list.length ? list.map((r,i) =>
-    `<li class="${session && r.name.toLowerCase()===session.user.toLowerCase()?'you':''}"><span class="rk">${i+1}</span><span class="nm">${esc(r.name)}</span><span class="vl">${esc(cfg.f(r.value))}</span></li>`).join('')
+    `<li data-n="${esc(r.name)}" class="tap ${session && r.name.toLowerCase()===session.user.toLowerCase()?'you':''}"><span class="rk">${i+1}</span><span class="nm"><b>${esc(r.name)}</b></span><span class="vl">${esc(cfg.f(r.value))}</span></li>`).join('')
     : '<li class="empty">Здесь пока никого. Станьте первым.</li>';
 }
+
+/* ---------- Профиль и игроки ---------- */
+const fmtDate = ts => ts ? new Date(ts).toLocaleDateString('ru-RU', {day:'numeric', month:'short', year:'numeric'}) : '—';
+function fmtAgo(ts) {
+  const d = Math.max(0, (Date.now() - ts) / 1000);
+  if (!ts) return 'давно';
+  if (d < 120) return 'только что';
+  if (d < 3600) return Math.floor(d/60) + ' мин назад';
+  if (d < 86400) return Math.floor(d/3600) + ' ч назад';
+  return Math.floor(d/86400) + ' дн назад';
+}
+const hue = s => { let h = 0; for (const c of s) h = (h*31 + c.charCodeAt(0)) % 360; return h; };
+const avatar = (n, cls='') => `<span class="av ${cls}" style="background:linear-gradient(135deg,hsl(${hue(n)},85%,62%),hsl(${(hue(n)+55)%360},85%,42%))">${esc([...n][0].toUpperCase())}</span>`;
+
+async function openProfile(name) {
+  const own = session && name.toLowerCase() === session.user.toLowerCase();
+  openView('profile', own ? 'profile' : 'players');
+  $('#profBox').innerHTML = '<div class="empty">Загрузка…</div>';
+  try {
+    const j = await (await fetch(API_URL + '?action=profile&name=' + encodeURIComponent(name))).json();
+    if (!j.ok) throw new Error(j.error);
+    renderProfile(j.profile, own);
+  } catch(e) { $('#profBox').innerHTML = '<div class="empty">' + esc(e.message || 'Не удалось загрузить профиль') + '</div>'; }
+}
+function renderProfile(p, own) {
+  const wr = p.games ? Math.round(p.wins / p.games * 100) : 0;
+  const rk = (ok, r, t) => `<span class="rank">${ok ? '#' + r : '—'} ${t}</span>`;
+  const st = [['Баланс', money(p.balance)], ['Долг', p.debt > 0 ? money(p.debt) : 'нет'], ['Партий', p.games], ['Побед', `${p.wins} (${wr}%)`],
+    ['Поставлено', money(p.totalWagered)], ['Выиграно', money(p.totalWon)], ['Лучший выигрыш', money(p.biggestWin)], ['Время в игре', fmtTime(p.playSeconds)]];
+  $('#profBox').innerHTML =
+    (own ? '' : '<button class="chip back" id="profBack">← К списку игроков</button>') +
+    `<div class="phead">${avatar(p.name, 'big')}<div><h2 class="disp pname">${esc(p.name)}${own ? ' <small>это вы</small>' : ''}</h2>
+      <p class="muted"><span class="dot ${p.online ? '' : 'off'}"></span>${p.online ? 'сейчас в игре' : 'был(а) ' + fmtAgo(p.lastSeen)} · с нами с ${fmtDate(p.createdAt)}</p></div></div>
+    <div class="ranks">${rk(true, p.ranks.balance, 'по балансу')}${rk(p.totalWon > 0, p.ranks.totalWon, 'по выигрышам')}${rk(p.playSeconds > 0, p.ranks.playSeconds, 'по времени')}${rk(p.games > 0, p.ranks.games, 'по партиям')}<span class="rank" style="background:rgba(255,255,255,.06);border-color:var(--line)">из ${p.totalPlayers}</span></div>
+    <div class="stats big">${st.map(([k, v]) => `<div class="stat"><span class="muted">${k}</span><b>${esc(v)}</b></div>`).join('')}</div>
+    <p class="muted" style="margin-top:16px">Процент побед: ${wr}%</p><div class="bar"><i style="width:${wr}%"></i></div>` +
+    (own ? '<button class="btn ghost" id="profOut" style="margin-top:20px">Выйти из аккаунта</button>' : '');
+  const back = $('#profBack'), out = $('#profOut');
+  if (back) back.onclick = () => openView('players');
+  if (out) out.onclick = () => logout();
+}
+
+let plData = null, pSort = 'seen';
+async function loadPlayers() {
+  try {
+    const j = await (await fetch(API_URL + '?action=players')).json();
+    if (j.ok) { plData = j.players; renderPlayers(); }
+  } catch(e) { if (!plData) $('#plist').innerHTML = '<li class="empty">Не удалось загрузить список</li>'; }
+}
+function renderPlayers() {
+  if (!plData) return;
+  const q = $('#psearch').value.trim().toLowerCase();
+  let l = plData.list.filter(p => p.name.toLowerCase().includes(q));
+  if (pSort === 'new') l = [...l].sort((a, b) => b.createdAt - a.createdAt);
+  else if (pSort === 'bal') l = [...l].sort((a, b) => b.balance - a.balance);
+  $('#pcount').innerHTML = `Всего игроков: <b>${plData.total}</b> · сейчас онлайн: <b>${plData.online}</b>`;
+  $('#plist').innerHTML = l.length ? l.map(p =>
+    `<li data-n="${esc(p.name)}" class="tap ${session && p.name.toLowerCase() === session.user.toLowerCase() ? 'you' : ''}">${avatar(p.name)}<span class="nm"><b>${esc(p.name)}</b><small><span class="dot ${p.online ? '' : 'off'}" style="margin-right:4px"></span>${p.online ? 'онлайн' : fmtAgo(p.lastSeen)} · с ${fmtDate(p.createdAt)}</small></span><span class="vl">${money(p.balance)}</span></li>`).join('')
+    : '<li class="empty">Никого не найдено</li>';
+}
+$('#psearch').oninput = renderPlayers;
+$('#psort').onclick = e => {
+  const c = e.target.closest('.chip'); if (!c) return;
+  pSort = c.dataset.s;
+  $$('#psort .chip').forEach(x => x.classList.toggle('on', x === c));
+  renderPlayers();
+};
+const openFromList = e => { const li = e.target.closest('li[data-n]'); if (li) openProfile(li.dataset.n); };
+$('#plist').onclick = openFromList;
+$('#lb').onclick = openFromList;
 
 /* ---------- Старт ---------- */
 (async function init() {
